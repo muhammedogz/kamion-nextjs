@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Table, TableBody } from '@/components/ui/table';
 import { Typography } from '@/components/ui/typography';
 import { Input } from '@/components/ui/input';
-import { SearchIcon } from 'lucide-react';
+import { SearchIcon, TicketX } from 'lucide-react';
 import { useShipments } from '@/hooks/useShipments';
 import { useDebounce } from '@/hooks/base/useDebounce';
 
@@ -34,15 +34,7 @@ export const TransportList: React.FC = () => {
     });
   };
 
-  if (error) {
-    return (
-      <div className="flex h-40 items-center justify-center">
-        <Typography variant="bodyBase" className="text-fg-cancelled">
-          Taşımalar yüklenemedi. Lütfen daha sonra tekrar deneyiniz.
-        </Typography>
-      </div>
-    );
-  }
+  console.log('error', error);
 
   const shipments = data || [];
 
@@ -61,9 +53,26 @@ export const TransportList: React.FC = () => {
         />
       </div>
 
-      {isLoading ? (
+      {error ? (
+        <div className="flex h-40 items-center justify-center">
+          <Typography
+            variant="bodyBase"
+            className="text-fg-cancelled text-center whitespace-pre-line"
+          >
+            {searchInput.length > 0 &&
+              `Taşıma id: ${searchInput} aramasında sorun oluştu.`}
+            {'\n'}
+            Taşımalar yüklenemedi. Lütfen daha sonra tekrar deneyiniz.
+          </Typography>
+        </div>
+      ) : isLoading ? (
         <div className="flex h-40 items-center justify-center">
           <Typography variant="bodyBase">Taşımalar yükleniyor...</Typography>
+        </div>
+      ) : shipments.length === 0 ? (
+        <div className="flex h-40 flex-col items-center justify-center">
+          <Typography variant="bodyLarge">Taşımalar bulunamadı.</Typography>
+          <TicketX className="text-fg-primary size-10" />
         </div>
       ) : (
         <div className="relative">

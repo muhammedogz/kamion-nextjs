@@ -13,5 +13,6 @@ export const useShipments = (params?: GetShipmentsParams) => {
       dispatch(setShipments(response.data));
       return response.data;
     },
+    retry: 2,
   });
 };
