@@ -45,6 +45,9 @@
   /* Foreground */
   --color-fg-primary: #0a2468;
   --color-fg-secondary: #7bb9fa;
+  --color-fg-muted: #bdc7d1;
+
+  --color-input-border: #e3e6ee;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
