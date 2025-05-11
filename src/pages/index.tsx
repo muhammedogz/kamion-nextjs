@@ -1,24 +1,17 @@
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
 import { Button } from '@/components/ui/button';
+import { LoginBackground } from '@/components/login-background';
+import { Inter } from 'next/font/google';
+import { cn } from '@/lib/utils';
 
 const inter = Inter({
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 export default function Home() {
   return (
-    <div className={`${inter.className} flex min-h-screen`}>
-      {/* Left side - Image */}
-      <div className="relative hidden w-1/2 lg:block">
-        <Image
-          src="/signin-image.jpg"
-          alt="Sign in illustration"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+    <div className={cn(inter.className, 'flex min-h-screen')}>
+      <LoginBackground />
 
       {/* Right side - Sign in form */}
       <div className="flex w-full items-center justify-center p-8 lg:w-1/2">
