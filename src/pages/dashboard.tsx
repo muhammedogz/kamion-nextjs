@@ -4,6 +4,7 @@ import { Header } from '@/components/pages/dashboard/header';
 import { Typography, typographyVariants } from '@/components/ui/typography';
 import { PageTitle } from '@/components/seo/PageTitle';
 import { cn } from '@/lib/utils';
+import { TransportList } from '@/components/pages/dashboard/transport/TransportList';
 
 function Dashboard() {
   return (
@@ -15,7 +16,7 @@ function Dashboard() {
       />
       <div className="bg-bg-dashboard flex h-screen flex-col gap-4">
         <Header />
-        <div className="container mx-auto max-w-[1250px]">
+        <div className="container mx-auto max-w-[1250px] space-y-4">
           <AnnouncementBanner>
             <Typography
               variant="bodySmall"
@@ -36,6 +37,7 @@ function Dashboard() {
               Güncellendi. Hemen İndirerek, Fırsatları Yakalayabilirsiniz.
             </Typography>
           </AnnouncementBanner>
+          <TransportList />
         </div>
         {/* Your dashboard content */}
       </div>

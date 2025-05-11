@@ -28,37 +28,41 @@ const typographyVariants = cva('', {
   },
 });
 
-export interface TypographyProps
-  extends React.HTMLAttributes<HTMLParagraphElement>,
-    VariantProps<typeof typographyVariants> {
-  as?: React.ElementType;
-}
+type TypographyProps = React.HTMLAttributes<HTMLParagraphElement> &
+  VariantProps<typeof typographyVariants> & {
+    as?: React.ElementType;
+  } & React.RefAttributes<HTMLParagraphElement>;
 
-const Typography = React.forwardRef<HTMLParagraphElement, TypographyProps>(
-  ({ className, variant, weight, as, ...props }, ref) => {
-    const isHeading = variant?.startsWith('h');
-    // Determine the default element based on variant
-    const defaultElement = isHeading
-      ? (variant as 'h1' | 'h2' | 'h3' | 'h4')
-      : 'p';
+const Typography = ({
+  className,
+  variant,
+  weight,
+  as,
+  ref,
+  ...props
+}: TypographyProps) => {
+  const isHeading = variant?.startsWith('h');
+  // Determine the default element based on variant
+  const defaultElement = isHeading
+    ? (variant as 'h1' | 'h2' | 'h3' | 'h4')
+    : 'p';
 
-    const Component = as || defaultElement;
+  const Component = as || defaultElement;
 
-    return (
-      <Component
-        className={cn(
-          typographyVariants({
-            variant,
-            weight,
-            className,
-          })
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
+  return (
+    <Component
+      className={cn(
+        typographyVariants({
+          variant,
+          weight,
+          className,
+        })
+      )}
+      ref={ref}
+      {...props}
+    />
+  );
+};
 Typography.displayName = 'Typography';
 
 export { Typography, typographyVariants };

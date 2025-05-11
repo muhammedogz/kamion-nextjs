@@ -7,6 +7,10 @@
   --color-bg-secondary: #7eafe8;
   --color-bg-dashboard: #f6f6f6;
   --color-bg-announcement: #e3e4ff;
+  --color-bg-success: #daf5ec;
+  --color-bg-inProgress: #fdbb60;
+  --color-bg-cancelled: #ffd9de;
+  --color-bg-pendingApproval: #f2f3f4;
 
   /* Foreground */
   --color-fg-primary: #0a2468;
@@ -14,8 +18,11 @@
   --color-fg-tertiary: #93979b;
   --color-fg-muted: #bdc7d1;
   --color-fg-announcement: #3e578a;
-
-  --color-input-border: #e3e6ee;
+  --color-fg-success: #1fcb91;
+  --color-fg-inProgress: #e08404;
+  --color-fg-cancelled: #e9344c;
+  --color-fg-pendingApproval: #0a2468;
+  --color-input-border: #092256;
 
   --color-destructive: #e9344c;
 }
