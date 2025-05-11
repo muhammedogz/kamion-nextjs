@@ -79,6 +79,7 @@ export function LoginForm() {
                   placeholder="Enter your password"
                   endAdornment={
                     <Button
+                      type="button"
                       size="icon"
                       variant="ghost"
                       onClick={() => setShowPassword(!showPassword)}
