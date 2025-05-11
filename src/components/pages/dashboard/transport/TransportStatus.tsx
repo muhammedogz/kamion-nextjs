@@ -28,7 +28,7 @@ const statusTextMap = {
 type TransportStatusProps = React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof transportStatusVariants>;
 
-export type StatusType = VariantProps<
+export type TransportStatusType = VariantProps<
   typeof transportStatusVariants
 >['variant'];
 

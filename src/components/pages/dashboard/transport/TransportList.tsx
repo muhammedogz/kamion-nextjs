@@ -1,68 +1,15 @@
 import TransportItem from '@/components/pages/dashboard/transport/TransportItem';
 import TransportHeader from '@/components/pages/dashboard/transport/TransportHeader';
-import { StatusType } from '@/components/pages/dashboard/transport/TransportStatus';
 import React, { useState } from 'react';
 import { Table, TableBody } from '@/components/ui/table';
 import { Typography } from '@/components/ui/typography';
 import { Input } from '@/components/ui/input';
 import { SearchIcon } from 'lucide-react';
-
-interface Transport {
-  id: string;
-  company: string;
-  route: string;
-  vehicle: string;
-  driver: string;
-  date: string;
-  price: number;
-  status: StatusType;
-}
-
-const testData: Transport[] = [
-  {
-    id: 'TR-001',
-    company: 'ABC Transport Ltd.',
-    route: 'İstanbul - Ankara',
-    vehicle: '34ABC123',
-    driver: 'Ahmet Yılmaz',
-    date: '2024-03-20',
-    price: 1500,
-    status: 'completed',
-  },
-  {
-    id: 'TR-002',
-    company: 'XYZ Logistics',
-    route: 'İzmir - Antalya',
-    vehicle: '35XYZ789',
-    driver: 'Mehmet Demir',
-    date: '2024-03-21',
-    price: 2000,
-    status: 'inProgress',
-  },
-  {
-    id: 'TR-003',
-    company: 'Fast Cargo',
-    route: 'Ankara - İstanbul',
-    vehicle: '06FAST456',
-    driver: 'Ayşe Kaya',
-    date: '2024-03-22',
-    price: 1800,
-    status: 'pendingApproval',
-  },
-  {
-    id: 'TR-004',
-    company: 'Express Delivery',
-    route: 'Bursa - İzmir',
-    vehicle: '16EXP789',
-    driver: 'Ali Öztürk',
-    date: '2024-03-23',
-    price: 1200,
-    status: 'cancelled',
-  },
-];
+import { useShipments } from '@/hooks/useShipments';
 
 export const TransportList: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
+  const { data, isLoading, error } = useShipments();
 
   const handleSelectionChange = (id: string, selected: boolean) => {
     setSelectedItems((prev) => {
@@ -76,6 +23,26 @@ export const TransportList: React.FC = () => {
     });
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex h-40 items-center justify-center">
+        <Typography variant="bodyBase">Taşımalar yükleniyor...</Typography>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-40 items-center justify-center">
+        <Typography variant="bodyBase" className="text-fg-cancelled">
+          Taşımalar yüklenemedi. Lütfen daha sonra tekrar deneyiniz.
+        </Typography>
+      </div>
+    );
+  }
+
+  const shipments = data || [];
+
   return (
     <div className="w-full space-y-2">
       <div className="flex items-center justify-between">
@@ -88,19 +55,25 @@ export const TransportList: React.FC = () => {
           placeholder="Arayın..."
         />
       </div>
-      <Table className="border-separate border-spacing-y-1">
-        <TransportHeader />
-        <TableBody className="space-y-1">
-          {testData.map((transport) => (
-            <TransportItem
-              key={transport.id}
-              {...transport}
-              selected={selectedItems.has(transport.id)}
-              onSelectionChange={handleSelectionChange}
-            />
-          ))}
-        </TableBody>
-      </Table>
+      <div className="relative">
+        <Table className="border-separate border-spacing-y-1">
+          <TransportHeader />
+        </Table>
+        <div className="[&::-webkit-scrollbar-thumb]:bg-bg-primary/60 hover:[&::-webkit-scrollbar-thumb]:bg-bg-primary/30 max-h-[calc(100vh-300px)] overflow-y-auto [&::-webkit-scrollbar]:w-0.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
+          <Table className="border-separate border-spacing-y-1">
+            <TableBody className="space-y-1">
+              {shipments.map((shipment) => (
+                <TransportItem
+                  key={shipment.id}
+                  shipment={shipment}
+                  selected={selectedItems.has(shipment.id.toString())}
+                  onSelectionChange={handleSelectionChange}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
     </div>
   );
 };

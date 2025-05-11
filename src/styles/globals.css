@@ -24,7 +24,8 @@
   --color-fg-cancelled: #e9344c;
   --color-fg-pendingApproval: #0a2468;
   --color-fg-icon: #5d5fef;
-  --color-input-border: #092256;
 
+  --color-border-input: #092256;
+  --color-border-checkbox: #0085ff;
   --color-destructive: #e9344c;
 }

@@ -1,80 +1,142 @@
 import React from 'react';
-import { StatusType, TransportStatus } from './TransportStatus';
-import { Typography } from '@/components/ui/typography';
+import { TransportStatusType, TransportStatus } from './TransportStatus';
+import { Typography, typographyVariants } from '@/components/ui/typography';
 import { TableCell, TableRow } from '@/components/ui/table';
-import { Package } from 'lucide-react';
+import { Package, Truck, User } from 'lucide-react';
+import { Shipment } from '@/types/services/shipment';
+
+interface TransportItemIconProps {
+  children: React.ReactNode;
+}
+
+const TransportItemIcon: React.FC<TransportItemIconProps> = ({ children }) => (
+  <span className="bg-icon-bg flex size-10 items-center justify-center rounded-full p-1">
+    {children}
+  </span>
+);
+
+const convertApiStatusToUiStatus = (status: number): TransportStatusType => {
+  return status === 0
+    ? 'pendingApproval'
+    : status === 1
+      ? 'inProgress'
+      : status === 2
+        ? 'completed'
+        : 'cancelled';
+};
 
 interface TransportItemProps {
-  id: string;
-  company: string;
-  route: string;
-  vehicle: string;
-  driver: string;
-  date: string;
-  price: number;
-  status: StatusType;
+  shipment: Shipment;
   selected: boolean;
   onSelectionChange: (id: string, selected: boolean) => void;
 }
 
 const TransportItem: React.FC<TransportItemProps> = ({
-  id,
-  company,
-  route,
-  vehicle,
-  driver,
-  date,
-  price,
-  status,
+  shipment,
   selected,
   onSelectionChange,
 }) => {
   return (
     <TableRow
       className="text-fg-primary h-22 cursor-pointer rounded-full bg-white hover:bg-white/70"
-      onClick={() => onSelectionChange(id, !selected)}
+      onClick={() => onSelectionChange(shipment.id.toString(), !selected)}
     >
       <TableCell className="w-12 px-4">
         <input
           type="checkbox"
           checked={selected}
-          onChange={(e) => onSelectionChange(id, e.target.checked)}
+          onChange={(e) =>
+            onSelectionChange(shipment.id.toString(), e.target.checked)
+          }
           className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
         />
       </TableCell>
-      <TableCell>
-        <Typography variant="bodyXSmall">{id}</Typography>
+      <TableCell className="w-20">
+        <Typography variant="bodyXSmall">{shipment.id}</Typography>
       </TableCell>
-      <TableCell>
+      <TableCell className="w-48">
         <Typography
           variant="bodyXSmall"
           className="inline-flex items-center gap-3"
         >
-          <div className="bg-icon-bg flex size-10 items-center justify-center rounded-full p-1">
+          <TransportItemIcon>
             <Package className="text-fg-icon size-4" />
-          </div>
-          {company}
+          </TransportItemIcon>
+          {shipment.shipper.name}
         </Typography>
       </TableCell>
-      <TableCell>
-        <Typography variant="bodyXSmall">{route}</Typography>
+      <TableCell className="w-64">
+        <Typography className="flex flex-col gap-1" variant="bodyXSmall">
+          <span className="inline-flex items-center gap-1">
+            <span className="bg-bg-primary block size-2.5 rounded-full" />
+            <span
+              className={typographyVariants({
+                variant: 'bodyXSmall',
+                weight: 'medium',
+              })}
+            >
+              Ofis,
+            </span>
+            {shipment.departure_address.city.name}
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <span className="border-border-checkbox block size-2.5 rounded-full border" />{' '}
+            <span
+              className={typographyVariants({
+                variant: 'bodyXSmall',
+                weight: 'medium',
+              })}
+            >
+              Fabrika,
+            </span>
+            {shipment.delivery_address.city.name}
+          </span>
+        </Typography>
       </TableCell>
-      <TableCell>
-        <Typography variant="bodyXSmall">{vehicle}</Typography>
+      <TableCell className="w-32">
+        <Typography
+          variant="bodyXSmall"
+          className="inline-flex items-center gap-3"
+        >
+          <TransportItemIcon>
+            <Truck className="text-fg-primary size-4" />
+          </TransportItemIcon>
+          <span className="flex flex-col gap-1">
+            {shipment.shipment_detail.vehicle_type_value}
+            <span className="text-border-input">
+              {shipment.shipment_detail.trailer_type_value?.[0]}
+            </span>
+          </span>
+        </Typography>
       </TableCell>
-      <TableCell>
-        <Typography variant="bodyXSmall">{driver}</Typography>
+      <TableCell className="w-40">
+        <Typography
+          variant="bodyXSmall"
+          className="inline-flex items-center gap-3"
+        >
+          <TransportItemIcon>
+            <User className="text-fg-primary size-4" />
+          </TransportItemIcon>
+          <p className="flex flex-col gap-1">
+            <span className="text-fg-primary">{shipment.shipper.name}</span>
+            <span className="text-border-input">{shipment.shipper.phone}</span>
+          </p>
+        </Typography>
       </TableCell>
-      <TableCell>
-        <Typography variant="bodyXSmall">{date}</Typography>
-      </TableCell>
-      <TableCell>
+      <TableCell className="w-32">
         <Typography variant="bodyXSmall">
-          {price.toLocaleString('tr-TR')} ₺
+          {new Date(shipment.pick_up_date).toLocaleDateString()}
         </Typography>
       </TableCell>
-      <TableCell>
-        <TransportStatus variant={status} />
+      <TableCell className="w-32">
+        <Typography variant="bodyXSmall">
+          {shipment.price?.toLocaleString('tr-TR')} ₺
+        </Typography>
+      </TableCell>
+      <TableCell className="w-32">
+        <TransportStatus
+          variant={convertApiStatusToUiStatus(shipment.latest_status.type)}
+        />
       </TableCell>
     </TableRow>
   );

@@ -9,43 +9,67 @@ const TransportHeader: React.FC = () => {
         <TableHead className="w-12 px-4">
           <div />
         </TableHead>
-        <TableHead>
-          <Typography variant="bodyXSmall" className="font-regular">
+        <TableHead className="w-20">
+          <Typography
+            variant="bodyXSmall"
+            className="font-regular text-fg-tertiary"
+          >
             ID
           </Typography>
         </TableHead>
-        <TableHead>
-          <Typography variant="bodyXSmall" className="font-regular">
+        <TableHead className="w-48">
+          <Typography
+            variant="bodyXSmall"
+            className="font-regular text-fg-tertiary"
+          >
             FIRMA
           </Typography>
         </TableHead>
-        <TableHead>
-          <Typography variant="bodyXSmall" className="font-regular">
+        <TableHead className="w-64">
+          <Typography
+            variant="bodyXSmall"
+            className="font-regular text-fg-tertiary"
+          >
             GÜZERGAH
           </Typography>
         </TableHead>
-        <TableHead>
-          <Typography variant="bodyXSmall" className="font-regular">
+        <TableHead className="w-32">
+          <Typography
+            variant="bodyXSmall"
+            className="font-regular text-fg-tertiary"
+          >
             ARAC
           </Typography>
         </TableHead>
-        <TableHead>
-          <Typography variant="bodyXSmall" className="font-regular">
+        <TableHead className="w-40">
+          <Typography
+            variant="bodyXSmall"
+            className="font-regular text-fg-tertiary"
+          >
             SÜRÜCÜ
           </Typography>
         </TableHead>
-        <TableHead>
-          <Typography variant="bodyXSmall" className="font-regular">
+        <TableHead className="w-32">
+          <Typography
+            variant="bodyXSmall"
+            className="font-regular text-fg-tertiary"
+          >
             TARİH
           </Typography>
         </TableHead>
-        <TableHead>
-          <Typography variant="bodyXSmall" className="font-regular">
-            FIYAT
+        <TableHead className="w-32">
+          <Typography
+            variant="bodyXSmall"
+            className="font-regular text-fg-tertiary"
+          >
+            FİYAT
           </Typography>
         </TableHead>
-        <TableHead>
-          <Typography variant="bodyXSmall" className="font-regular">
+        <TableHead className="w-32">
+          <Typography
+            variant="bodyXSmall"
+            className="font-regular text-fg-tertiary"
+          >
             DURUM
           </Typography>
         </TableHead>

@@ -15,8 +15,7 @@ export const useLogin = () => {
       authService.login(credentials),
     onSuccess: (response) => {
       dispatch(setCredentials({ token: response.data.token }));
-      // router.push(ROUTES.DASHBOARD);
-      console.log('response', response);
+      router.push(ROUTES.DASHBOARD);
     },
   });
 };

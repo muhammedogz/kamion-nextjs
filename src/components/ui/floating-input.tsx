@@ -19,7 +19,7 @@ function FloatingInput({
   return (
     <div
       className={cn(
-        'group border-input-border relative flex h-22 flex-col gap-2 rounded-lg border bg-transparent p-6 transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+        'group border-border-input relative flex h-22 flex-col gap-2 rounded-lg border bg-transparent p-6 transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
         'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
         'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive'
       )}
