@@ -100,7 +100,7 @@ function FormLabel({
         // When focus applied and input is empty
         'group-focus-within:text-fg-muted group-focus-within:top-2 group-focus-within:cursor-default group-focus-within:text-xs group-focus-within:font-medium',
         // When input has value
-        'has-[+input:not(:placeholder-shown)]:text-fg-muted has-[+input:not(:placeholder-shown)]:pointer-events-none has-[+input:not(:placeholder-shown)]:top-2 has-[+input:not(:placeholder-shown)]:cursor-default has-[+input:not(:placeholder-shown)]:text-xs has-[+input:not(:placeholder-shown)]:font-medium',
+        'has-[+input:not(:placeholder-shown)]:text-fg-muted has-[+input:not(:placeholder-shown)]:data-[error=true]:text-destructive has-[+input:not(:placeholder-shown)]:pointer-events-none has-[+input:not(:placeholder-shown)]:top-2 has-[+input:not(:placeholder-shown)]:cursor-default has-[+input:not(:placeholder-shown)]:text-xs has-[+input:not(:placeholder-shown)]:font-medium',
         'data-[error=true]:text-destructive',
 
         className
@@ -155,7 +155,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn('text-destructive text-sm', className)}
+      className={cn('text-destructive text-end text-sm', className)}
       {...props}
     >
       {body}

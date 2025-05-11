@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useLogin } from '@/hooks/useLogin';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -27,6 +28,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const loginMutation = useLogin();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -37,8 +39,7 @@ export function LoginForm() {
   });
 
   function onSubmit(data: LoginFormValues) {
-    // Handle form submission
-    console.log(data);
+    loginMutation.mutate(data);
   }
 
   return (
@@ -97,8 +98,13 @@ export function LoginForm() {
           )}
         />
 
-        <Button type="submit" className="md:self-end">
-          Login
+        <Button
+          type="submit"
+          className="md:self-end"
+          disabled={loginMutation.isPending}
+          isLoading={loginMutation.isPending}
+        >
+          {loginMutation.isPending ? 'Logging in...' : 'Login'}
           <ArrowRight className="size-4" />
         </Button>
       </form>
