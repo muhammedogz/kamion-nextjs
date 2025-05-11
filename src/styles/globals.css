@@ -11,6 +11,7 @@
   --color-bg-inProgress: #fdbb60;
   --color-bg-cancelled: #ffd9de;
   --color-bg-pendingApproval: #f2f3f4;
+  --color-icon-bg: #eeeeff;
 
   /* Foreground */
   --color-fg-primary: #0a2468;
@@ -22,6 +23,7 @@
   --color-fg-inProgress: #e08404;
   --color-fg-cancelled: #e9344c;
   --color-fg-pendingApproval: #0a2468;
+  --color-fg-icon: #5d5fef;
   --color-input-border: #092256;
 
   --color-destructive: #e9344c;

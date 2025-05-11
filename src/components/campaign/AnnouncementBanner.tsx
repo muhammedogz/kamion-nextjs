@@ -23,7 +23,7 @@ export const AnnouncementBanner = ({
       )}
       onClick={onClick}
     >
-      <PartyPopperIcon className="text-fg-primary size-4" />
+      <PartyPopperIcon className="text-fg-icon size-4" />
       {children}
     </div>
   );

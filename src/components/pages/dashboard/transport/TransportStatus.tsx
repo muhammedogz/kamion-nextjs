@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const transportStatusVariants = cva(
-  'h-9 w-full px-4 py-3.5 rounded-full flex items-center justify-center text-[10px] text-center',
+  'h-9 w-30 px-4 py-3.5 rounded-full flex items-center justify-center text-[10px] text-center',
   {
     variants: {
       variant: {

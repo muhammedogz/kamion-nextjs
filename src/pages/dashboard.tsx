@@ -28,7 +28,7 @@ function Dashboard() {
                   typographyVariants({
                     variant: 'bodySmall',
                     weight: 'medium',
-                    className: 'text-fg-primary',
+                    className: 'text-fg-icon',
                   })
                 )}
               >

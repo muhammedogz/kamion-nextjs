@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/floating-input';
 import { useLogin } from '@/hooks/useLogin';
 
 const loginSchema = z.object({

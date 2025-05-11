@@ -3,44 +3,48 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 type InputProps = React.ComponentProps<'input'> & {
-  label?: React.ReactNode;
+  startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
+  variant?: 'default' | 'ghost';
 };
 
 function Input({
   className,
   type,
-  label,
   id,
+  startAdornment,
   endAdornment,
-  ref,
+  variant = 'default',
   ...props
 }: InputProps) {
   return (
-    <div
-      className={cn(
-        'group border-input-border relative flex h-22 flex-col gap-2 rounded-lg border bg-transparent p-6 transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
-        'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
-        'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive'
-      )}
-      {...props}
-    >
-      {label}
+    <div className="group relative">
+      <div className="absolute inset-y-0 left-4 flex items-center transition-transform duration-200 group-focus-within:scale-110">
+        {startAdornment}
+      </div>
       <input
-        ref={ref}
         id={id}
         type={type}
         data-slot="input"
         // Purposely set to new-password to prevent auto-fill
-        autoComplete="new-password"
+        autoComplete={'new-password'}
         className={cn(
-          'placeholder:text-fg-muted/50 selection:bg-bg-primary text-fg-primary flex h-full w-full min-w-0 border border-none bg-none p-0 text-base transition-[color,box-shadow] outline-none selection:text-white file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:invisible disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
-          'focus-visible:ring-none focus-within:placeholder:visible focus-visible:border-none',
+          'placeholder:text-fg-muted/50 selection:bg-bg-primary/20',
+          'flex w-full min-w-0 rounded-full',
+          'px-4 py-2.5 text-base transition-all duration-200',
+          'ring-0 outline-none',
+          'hover:border-border/60 hover:bg-background/80',
+          'focus:border-primary/50 focus:bg-background focus:ring-primary/20 focus:ring-1',
+          'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+          'file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium',
+          'md:text-sm',
+          variant === 'ghost' &&
+            'hover:bg-background/50 border-none bg-transparent',
           className
         )}
         {...props}
       />
-      <div className="absolute inset-y-0 right-6 flex items-center">
+      <div className="absolute inset-y-0 right-4 flex items-center transition-transform duration-200 group-focus-within:scale-110">
         {endAdornment}
       </div>
     </div>

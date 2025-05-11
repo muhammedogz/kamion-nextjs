@@ -2,17 +2,17 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-const typographyVariants = cva('', {
+const typographyVariants = cva('text-fg-primary', {
   variants: {
     variant: {
       h1: 'text-[64px] font-medium leading-[138%] tracking-normal',
       h2: 'text-[48px] font-medium leading-[64px] tracking-normal',
       h3: 'text-2xl font-medium leading-[120%] tracking-normal',
-      h4: 'text-lg font-medium leading-[120%] tracking-normal',
+      h4: 'text-[20px] font-medium leading-[120%] tracking-normal',
       bodyLarge: 'text-xl leading-[144%]',
       bodyBase: 'text-base',
       bodySmall: 'text-sm',
-      bodyXSmall: 'text-xs leading-[166%]',
+      bodyXSmall: 'text-[11px] leading-[166%]',
     },
     weight: {
       light: 'font-light',
