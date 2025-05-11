@@ -24,18 +24,18 @@ export function LoginBackground() {
         />
       </div>
       <div className="absolute inset-0 z-10 mb-10 flex flex-col items-center justify-end text-center text-white">
-        <Typography variant="bodyBase" className="mb-4">
+        <Typography variant="bodyBase" className="mb-4 text-white">
           ONE PLATFORM FOR ALL ROAD FREIGHT
         </Typography>
-        <Typography variant="h1" className="mb-8">
+        <Typography variant="h1" className="mb-8 text-white">
           Visibility, Efficiency, Sustainability
         </Typography>
-        <Typography variant="h3" weight="light">
+        <Typography variant="h3" weight="light" className="text-white">
           <span className="text-fg-secondary">MENA’s</span> Most Efficient
           Digital Freight Network
         </Typography>
         <Button variant="secondary" className="mt-8">
-          <Typography variant="bodyLarge" weight="light">
+          <Typography variant="bodyLarge" weight="light" className="text-white">
             Join the Kamion Logistics Network{' '}
             <span
               className={cn(
@@ -43,7 +43,7 @@ export function LoginBackground() {
                   variant: 'bodyLarge',
                   weight: 'medium',
                 }),
-                'underline'
+                'text-white underline'
               )}
             >
               Sing Up

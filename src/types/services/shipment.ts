@@ -124,12 +124,90 @@ interface ShipmentDetail extends BaseEntity {
   empty_km: null;
 }
 
+interface Price extends BaseEntity {
+  shipper: {
+    id: number;
+    freight_price: string;
+    freight_price_tax_free: string;
+    price_details: {
+      base_price: string;
+      base_currency: {
+        id: number;
+        name: string;
+        code: string;
+        value: string;
+        updated_at: string;
+      };
+      converting_currency: {
+        id: number;
+        name: string;
+        code: string;
+        value: string;
+        updated_at: string;
+      };
+      converting_exchange: string;
+    };
+    status: number;
+    status_value: string;
+    giving_price_user: null;
+    price_confirming_user: null;
+    created_at: number;
+  };
+  carrier: {
+    id: number;
+    carrier_price: string;
+    carrier_price_tax_free: string;
+    carrier_cash_price_tax_free: null;
+    cash_payment: boolean;
+    price_details: {
+      base_price: string;
+      base_currency: {
+        id: number;
+        name: string;
+        code: string;
+        value: string;
+        updated_at: string;
+      };
+      converting_currency: {
+        id: number;
+        name: string;
+        code: string;
+        value: string;
+        updated_at: string;
+      };
+      converting_exchange: string;
+    };
+    giving_price_user: null;
+    created_at: number;
+  };
+  offers: {
+    carrier_price_offer: null;
+    carrier_price_offer_currency: string;
+    carrier_target_price_tax_free: null;
+    carrier_target_price_currency: string;
+  };
+  kamion: {
+    kamion_share_percent: string;
+    kamion_share: string;
+    kamion_share_currency: string;
+  };
+}
+
+interface Vehicle extends BaseEntity {
+  id: number;
+  type: number;
+  type_value: string;
+  group_type: number;
+  group_type_value: string | null;
+  plate: string;
+}
+
 // Status related types
 interface ShipmentStatus extends BaseEntity {
   /**
    * 0: pending
    * 1: in_progress
-   * 2: completed
+   * 11: completed
    * 3: cancelled
    */
   type: number;
@@ -138,14 +216,17 @@ interface ShipmentStatus extends BaseEntity {
 
 // Main Shipment interface
 export interface Shipment extends BaseEntity {
-  shipper: Shipper;
-  carrier: null;
+  shipper: Shipper | null;
+  vehicle: Vehicle | null;
   driver: User | null;
-  vehicle: null;
-  code: string;
-  trailer: null;
+
   departure_address: Address;
   delivery_address: Address;
+  price: Price | null;
+
+  trailer: null;
+  carrier: null;
+  code: string;
   pick_up_date: number;
   time_interval: {
     start: string;
@@ -169,7 +250,6 @@ export interface Shipment extends BaseEntity {
   shipment_detail: ShipmentDetail;
   creator: User;
   driver_last_location: null;
-  price: number | null;
   view_count: number | null;
   viewer_count: number | null;
   carrier_payment_receipt_upload: boolean;

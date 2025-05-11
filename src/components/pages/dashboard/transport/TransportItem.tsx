@@ -20,7 +20,7 @@ const convertApiStatusToUiStatus = (status: number): TransportStatusType => {
     ? 'pendingApproval'
     : status === 1
       ? 'inProgress'
-      : status === 2
+      : status === 11
         ? 'completed'
         : 'cancelled';
 };
@@ -62,7 +62,7 @@ const TransportItem: React.FC<TransportItemProps> = ({
           <TransportItemIcon>
             <Package className="text-fg-icon size-4" />
           </TransportItemIcon>
-          {shipment.shipper.name}
+          {shipment.shipper?.name}
         </Typography>
       </TableCell>
       <TableCell className="w-64">
@@ -102,9 +102,9 @@ const TransportItem: React.FC<TransportItemProps> = ({
             <Truck className="text-fg-primary size-4" />
           </TransportItemIcon>
           <span className="flex flex-col gap-1">
-            {shipment.shipment_detail.vehicle_type_value}
+            {shipment.vehicle?.plate}
             <span className="text-border-input">
-              {shipment.shipment_detail.trailer_type_value?.[0]}
+              {shipment.vehicle?.type_value}
             </span>
           </span>
         </Typography>
@@ -118,19 +118,21 @@ const TransportItem: React.FC<TransportItemProps> = ({
             <User className="text-fg-primary size-4" />
           </TransportItemIcon>
           <p className="flex flex-col gap-1">
-            <span className="text-fg-primary">{shipment.shipper.name}</span>
-            <span className="text-border-input">{shipment.shipper.phone}</span>
+            <span className="text-fg-primary">
+              {shipment.driver?.name} {shipment.driver?.surname}
+            </span>
+            <span className="text-border-input">{shipment.driver?.phone}</span>
           </p>
         </Typography>
       </TableCell>
       <TableCell className="w-32">
         <Typography variant="bodyXSmall">
-          {new Date(shipment.pick_up_date).toLocaleDateString()}
+          {new Date(shipment.pick_up_date).toLocaleDateString('tr-TR')}
         </Typography>
       </TableCell>
       <TableCell className="w-32">
         <Typography variant="bodyXSmall">
-          {shipment.price?.toLocaleString('tr-TR')} ₺
+          {shipment.price?.carrier?.carrier_price} ₺
         </Typography>
       </TableCell>
       <TableCell className="w-32">
