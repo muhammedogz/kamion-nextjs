@@ -96,7 +96,13 @@ function FormLabel({
       data-slot="form-label"
       data-error={!!error}
       className={cn(
-        'data-[error=true]:text-destructive text-fg-muted',
+        'origin-start group-focus-within:text-foreground text-fg-primary absolute top-8 block cursor-text text-base font-medium transition-all group-focus-within:pointer-events-none',
+        // When focus applied and input is empty
+        'group-focus-within:text-fg-muted group-focus-within:top-2 group-focus-within:cursor-default group-focus-within:text-xs group-focus-within:font-medium',
+        // When input has value
+        'has-[+input:not(:placeholder-shown)]:text-fg-muted has-[+input:not(:placeholder-shown)]:pointer-events-none has-[+input:not(:placeholder-shown)]:top-2 has-[+input:not(:placeholder-shown)]:cursor-default has-[+input:not(:placeholder-shown)]:text-xs has-[+input:not(:placeholder-shown)]:font-medium',
+        'data-[error=true]:text-destructive',
+
         className
       )}
       htmlFor={formItemId}

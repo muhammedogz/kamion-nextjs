@@ -1,6 +1,6 @@
 import { Typography, typographyVariants } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
-import { Eye, Copyright } from 'lucide-react';
+import { Copyright } from 'lucide-react';
 import Image from 'next/image';
 
 export function LoginHeader() {
@@ -20,7 +20,7 @@ export function LoginHeader() {
         <span
           className={cn(
             typographyVariants({ variant: 'h2', weight: 'medium' }),
-            'inline-flex gap-2'
+            'inline-flex gap-1'
           )}
         >
           Kamion <Copyright />

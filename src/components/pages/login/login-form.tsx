@@ -54,7 +54,7 @@ export function LoginForm() {
             <FormItem>
               <FormControl>
                 <Input
-                  label={<FormLabel>Email</FormLabel>}
+                  label={<FormLabel>Email Address</FormLabel>}
                   endAdornment={<MailIcon className="text-bg-primary size-6" />}
                   type="email"
                   placeholder="Enter your email"
