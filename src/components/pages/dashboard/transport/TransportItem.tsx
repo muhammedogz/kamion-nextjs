@@ -15,7 +15,9 @@ const TransportItemIcon: React.FC<TransportItemIconProps> = ({ children }) => (
   </span>
 );
 
-const convertApiStatusToUiStatus = (status: number): TransportStatusType => {
+const convertApiStatusToUiStatus = (status?: number): TransportStatusType => {
+  if (status === undefined) return 'pendingApproval';
+
   return status === 0
     ? 'pendingApproval'
     : status === 1
@@ -89,7 +91,7 @@ const TransportItem: React.FC<TransportItemProps> = ({
             >
               Fabrika,
             </span>
-            {shipment.delivery_address.city.name}
+            {shipment?.delivery_address?.city?.name}
           </span>
         </Typography>
       </TableCell>
@@ -137,7 +139,7 @@ const TransportItem: React.FC<TransportItemProps> = ({
       </TableCell>
       <TableCell className="w-32">
         <TransportStatus
-          variant={convertApiStatusToUiStatus(shipment.latest_status.type)}
+          variant={convertApiStatusToUiStatus(shipment.latest_status?.type)}
         />
       </TableCell>
     </TableRow>

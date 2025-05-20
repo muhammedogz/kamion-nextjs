@@ -239,7 +239,7 @@ export interface Shipment extends BaseEntity {
   type_value: string;
   status: number;
   is_invoice_created: boolean;
-  latest_status: ShipmentStatus;
+  latest_status: ShipmentStatus | null;
   planned_transport: null;
   payment_type: null;
   payment_status: null;
